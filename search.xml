@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>reverse-PlaidCTF2023WP复现-js逆向</title>
+      <title>PlaidCTF2023WriteUp复现-js逆向</title>
       <link href="/2023/04/17/reverse-PlaidCTF2023WP%E5%A4%8D%E7%8E%B0-js%E9%80%86%E5%90%91/"/>
       <url>/2023/04/17/reverse-PlaidCTF2023WP%E5%A4%8D%E7%8E%B0-js%E9%80%86%E5%90%91/</url>
       
@@ -42,7 +42,7 @@
     
     
     <entry>
-      <title>reverse-NKCTF2023WP</title>
+      <title>NKCTF2023逆向区WriteUp</title>
       <link href="/2023/03/27/reverse-NKCTF2023WP/"/>
       <url>/2023/03/27/reverse-NKCTF2023WP/</url>
       
@@ -52,7 +52,7 @@
       
         <tags>
             
-            <tag> Reverse </tag>
+            <tag> WriteUp </tag>
             
         </tags>
       
@@ -61,7 +61,7 @@
     
     
     <entry>
-      <title>reverse-2023数字人才挑战赛-安恒WP</title>
+      <title>数字网络安全人才挑战赛2023-逆向区WriteUp</title>
       <link href="/2023/03/25/reverse-2023%E6%95%B0%E5%AD%97%E4%BA%BA%E6%89%8D%E6%8C%91%E6%88%98%E8%B5%9B-%E5%AE%89%E6%81%92WP/"/>
       <url>/2023/03/25/reverse-2023%E6%95%B0%E5%AD%97%E4%BA%BA%E6%89%8D%E6%8C%91%E6%88%98%E8%B5%9B-%E5%AE%89%E6%81%92WP/</url>
       
@@ -71,7 +71,7 @@
       
         <tags>
             
-            <tag> Reverse </tag>
+            <tag> WriteUp </tag>
             
         </tags>
       
@@ -99,7 +99,7 @@
     
     
     <entry>
-      <title>reverse-kalmarCTF部分WP1</title>
+      <title>kalmarCTF逆向区部分WP</title>
       <link href="/2023/03/06/reverse-kalmarCTF%E9%83%A8%E5%88%86WP/"/>
       <url>/2023/03/06/reverse-kalmarCTF%E9%83%A8%E5%88%86WP/</url>
       
@@ -109,7 +109,7 @@
       
         <tags>
             
-            <tag> Reverse </tag>
+            <tag> WriteUp </tag>
             
         </tags>
       
@@ -283,13 +283,19 @@
     
     
     <entry>
-      <title>reverse-VNCTF2023WriteUp</title>
+      <title>VNCTF2023逆向区WriteUp</title>
       <link href="/2023/02/19/reverse-VNCTF2023WriteUp/"/>
       <url>/2023/02/19/reverse-VNCTF2023WriteUp/</url>
       
         <content type="html"><![CDATA[<h1 id="babyAnti"><a href="#babyAnti" class="headerlink" title="babyAnti"></a>babyAnti</h1><p>下载附件 是个apk文件  </p><p><code>对于这类文件  都先放入模拟器运行一下看是否有切入点</code></p><p><code>然后可以使用jadx去看源代码 </code></p><p><code>或者也可以解压出来找到.so文件拖入ida进行分析</code> </p><p>打开模拟器  先运行一下(笔者是用的夜神模拟器)</p><p>如何下载去Google搜一下就好了</p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219093015720.png" alt="image-20230219093015720"></p><p>发现是个小恐龙游戏</p><p>(就是哪个没网时浏览器的哪个放松-摸鱼游戏)</p><p>然后需要3000就会给flag  看着挺简单</p><p>Setting里面没啥东西  不影响</p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219093458459.png" alt="image-20230219093458459"></p><p>然后去下载一个GG修改器</p><p>如何打过最近的RealWorldCTF体验赛的话应该就会马上找到切入点了   和哪个贪吃蛇游戏 很类似</p><p>(先说一句  比那个难点 ，可能是笔者太菜了 想了半天 )</p><p>这里笔者推荐下载GameGuardian.101.1_for_Nox_Bluestacks-GDaily.org</p><p>这个版本  适配于夜神的</p><p>找到分数的代码  发现挺多 不过类型不一样</p><p>先改改试试</p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219094111407.png" alt="image-20230219094111407"></p><p>发现  有反作弊检测 好烦 (没整过  怎么办)</p><p>大致猜测了一下  用过ce (改加密数据) 的应该能猜到的</p><p>应该是相同地址类型byte的改成0&#x2F;1是反作弊的</p><p>dword qword类型的是分数</p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219094233369.png" alt="image-20230219094233369"></p><p>放到jadx去看一下 我测  找半天没找到main和cheat的代码</p><p>这个贴一下队里✌的图  ta用的jeb</p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219094646660.png" alt="image-20230219094646660"></p><p>这是jadx的图</p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219094736912.png" alt="image-20230219094736912"></p><p>然后试一下  过啦</p><p><code>flag&#123;D1n0_Run_0ut_0f_The_F0rest_F1nally^_^&#125;</code> </p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219104459578.png" alt="image-20230219104459578"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这道题（队里大佬jiao的）猜出来的</p><p>怎么说呢 算是开拓思维了</p><p>挺好的  又知道了一种题型</p><p>Orz </p><p>出官方WP我去看看到底怎么个事</p><h1 id="PZGalaxy"><a href="#PZGalaxy" class="headerlink" title="PZGalaxy"></a>PZGalaxy</h1><p>是个网页题</p><p>随便输一下  很明显是个error</p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219103726232.png" alt="image-20230219103726232"></p><p>F12  看一下</p><p>找到关键函数</p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219103915079.png" alt="image-20230219103915079"></p><p>发现key为8位并且前4位是2023</p><p>cipher给了出来 然后flag的前4位是“flag”</p><p>所以  很简单  暴破一下后四位key就好了</p><p>这儿去Google一个RC4解密脚本</p><p>小改一下就好了</p><p>贴exp</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">RC4</span>(<span class="params">keys</span>):</span><br><span class="line">    cipher = [<span class="number">166</span>, <span class="number">112</span>, <span class="number">58</span>, <span class="number">220</span>]</span><br><span class="line">    key = <span class="built_in">list</span>(keys)</span><br><span class="line">    <span class="comment"># KSA</span></span><br><span class="line">    S = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>)]</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        j = (j + S[i] + <span class="built_in">ord</span>(key[i % <span class="built_in">len</span>(key)])) % <span class="number">256</span></span><br><span class="line">        S[i], S[j] = S[j], S[i]</span><br><span class="line">    <span class="comment"># PRGA</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    keystream = []</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(cipher)):</span><br><span class="line">        i = (i + <span class="number">1</span>) % <span class="number">256</span></span><br><span class="line">        j = (j + S[i]) % <span class="number">256</span></span><br><span class="line">        S[i], S[j] = S[j], S[i]</span><br><span class="line">        keystream.append(S[(S[i] + S[j]) % <span class="number">256</span>])</span><br><span class="line"></span><br><span class="line">    enc = <span class="string">&quot;&quot;</span>.join(<span class="built_in">map</span>(<span class="built_in">chr</span>, [(cipher[i] ^ keystream[i]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(keystream))]))</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;flag&quot;</span> <span class="keyword">in</span> enc:</span><br><span class="line">        <span class="built_in">print</span>(key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">48</span>, <span class="number">57</span>):  <span class="comment"># 48-57 ---- 0-9</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">48</span>, <span class="number">57</span>):</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">48</span>, <span class="number">57</span>):</span><br><span class="line">            <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">48</span>, <span class="number">57</span>):</span><br><span class="line">                RC4(<span class="string">&quot;2023&quot;</span> + <span class="built_in">chr</span>(i) + <span class="built_in">chr</span>(j) + <span class="built_in">chr</span>(m) + <span class="built_in">chr</span>(n))</span><br><span class="line"></span><br><span class="line"><span class="comment">#20230127</span></span><br></pre></td></tr></table></figure><p>然后交一下<code>20230127</code> 过啦</p><p>flag<code>flag&#123;HitYourSoulAndSeeYoulnTheGalaxy&#125;</code></p><p><img src="/2023/02/19/reverse-VNCTF2023WriteUp/image-20230219104225432.png" alt="image-20230219104225432"></p><p>好的  本题完成</p><h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>这一题  还是很简单的   会RC4算法就好了</p><p>好的  本期结束  感谢观看</p><p>Orz</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> WriteUp </tag>
+            
+        </tags>
       
     </entry>
     
