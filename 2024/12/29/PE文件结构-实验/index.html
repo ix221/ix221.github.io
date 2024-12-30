@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>PE文件结构+实验 | 摘星阁</title><meta name="author" content="IX221"><meta name="copyright" content="IX221"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
+<meta property="og:title" content="PE文件结构+实验">
+<meta property="og:url" content="http://example.com/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/index.html">
+<meta property="og:site_name" content="摘星阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/touxiang1.png">
+<meta property="article:published_time" content="2024-12-29T06:59:48.000Z">
+<meta property="article:modified_time" content="2024-12-29T14:25:52.247Z">
+<meta property="article:author" content="IX221">
+<meta property="article:tag" content="Reverse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/touxiang1.png"><link rel="shortcut icon" href="/img/touxiang.png"><link rel="canonical" href="http://example.com/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'PE文件结构+实验',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-29 22:25:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/touxiang1.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="摘星阁"><span class="site-name">摘星阁</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PE文件结构+实验</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-29T06:59:48.000Z" title="发表于 2024-12-29 14:59:48">2024-12-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-29T14:25:52.247Z" title="更新于 2024-12-29 22:25:52">2024-12-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%A6%E4%B9%A0/">二进制学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="PE文件结构+实验"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><html><head></head><body><h1 id="1-啥是PE？"><a href="#1-啥是PE？" class="headerlink" title="1. 啥是PE？"></a>1. 啥是PE？</h1><p>PE文件，即Portable Executable File Format，是Windows下可执行程序的一个统称，Windows下的所有可执行文件都是PE文件格式，比如.exe，.dll，.sys等。</p>
+<p>PE文件是指 32 位可执行文件，也称为PE32。64位的可执行文件称为 <strong>PE+</strong> 或 <strong>PE32+<strong>，是PE(PE32)的一种扩展形式(请</strong>注意不是PE64</strong>)。</p>
+<p>PE文件由PE头和PE体组成，而非只有头部。</p>
+<p>PE结构不是一个单纯的结构，一个PE文件由若干个结构集合所构成，不同的结构有不同的用处。</p>
+<p>PE文件格式是一种对文件组织管理的方式。</p>
+<p><img src="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/0.png" alt="0"></p>
+<p>来张图助助兴，如下图所示=。=</p>
+<p><img src="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/2.png" alt="2"></p>
+<h1 id="2-PE文件结构概述"><a href="#2-PE文件结构概述" class="headerlink" title="2.PE文件结构概述"></a>2.PE文件结构概述</h1><h2 id="2-1-PE文件结构"><a href="#2-1-PE文件结构" class="headerlink" title="2.1 PE文件结构"></a>2.1 PE文件结构</h2><p>一般分为4个部分：</p>
+<ul>
+<li><strong>DOS头</strong>：DOS头是PE文件结构的第一个头，用来保持对DOS系统的兼容，并且用于定位真正的PE头。我们关注的主要是两个属性：e_magic （MZ标识）和 e_lfanew（定位真正的PE头）。</li>
+<li><strong>NT头</strong>：包括PE文件标识、PE文件头和可选头。包含 windows PE 文件的主要信息，其中包括一个 ‘PE’ 字样的签名，PE文件头(IMAGE_FILE_HEADER)和 PE可选头(IMAGE_OPTIONAL_HEADER32)。</li>
+<li><strong>节表</strong>：是PE文件后续节的描述，windows根据节表的描述加载每个节。</li>
+<li><strong>节</strong>：每个节实际上是一个容器，可以包含 代码、数据 等等，每个节可以有独立的内存权限，比如代码节默认有读/执行权限，节的名字和数量可以自己定义。</li>
+</ul>
+<h2 id="2-2-编写示例程序"><a href="#2-2-编写示例程序" class="headerlink" title="2.2 编写示例程序"></a>2.2 编写示例程序</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">.386  //用到的汇编指令的指令集是.386</span><br><span class="line">.model flat, stdcall //flat表示使用的是内存的平坦模式，stdcall是函数调用的一种方式</span><br><span class="line">option casemap:none //casemap:none就是不区分大小写</span><br><span class="line"></span><br><span class="line">//调用头文件和链接库</span><br><span class="line">include windows.inc //一些常量</span><br><span class="line">include kernel32.inc //kernel32.dll中的一些系统函数</span><br><span class="line">include user32.inc //user32.dll的一些函数</span><br><span class="line">includelib kernel32.lib</span><br><span class="line">includelib user32.lib</span><br><span class="line"></span><br><span class="line">//定义字符串</span><br><span class="line">	.data</span><br><span class="line">szCaption   db  <span class="string">'hello'</span>, 0 //db是字节的意思，定义hello字符串，汇编中win32用,<span class="string">'\0'</span>进行结尾</span><br><span class="line">szText	    db 	<span class="string">'hello world!'</span>, 0</span><br><span class="line"></span><br><span class="line">//代码部分</span><br><span class="line">	.code</span><br><span class="line">start: //代码从标号开始执行，下面的end start也就是说标号是start</span><br><span class="line">	push 0</span><br><span class="line">	lea eax, szCaption</span><br><span class="line">	push eax</span><br><span class="line">	lea eax, szText</span><br><span class="line">	push eax</span><br><span class="line">	push 0</span><br><span class="line">	call MessageBox //一段简单的弹窗代码，弹出文本szCaption和szText</span><br><span class="line">	push 0</span><br><span class="line">	call ExitProcess</span><br><span class="line">	end start</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/image-20241229182540062-1735467949238-1.png" alt="image-20241229182540062"></p>
+<p>下面的一系列操作以及对PE文件结构的学习均以此程序为例。</p>
+<h2 id="2-3-VA-虚拟地址-与-RVA-相对虚拟地址"><a href="#2-3-VA-虚拟地址-与-RVA-相对虚拟地址" class="headerlink" title="2.3 VA(虚拟地址)与 RVA(相对虚拟地址)"></a>2.3 VA(虚拟地址)与 RVA(相对虚拟地址)</h2><p>当一个PE文件被加载到内存中以后，我们称之为”映象 “(image)，一般来说，PE文件在硬盘上和在内存里是不完全一样的，被加载到内存以后其占用的虚拟地址空间要比在硬盘上占用的空间大一些，这是因为各个节在硬盘上是连续的，而在内存中是<strong>按页对齐</strong>的，所以加载到内存以后节之间会出现一些“空洞”。<br>因为存在这种对齐，所以在PE结构内部，表示某个位置的地址采用了两种方式：</p>
+<ul>
+<li>针对在硬盘上存储文件中的地址，称为原始存储地址或物理地址，表示<strong>距离文件头的偏移</strong>。</li>
+<li>针对加载到内存以后映象中的地址，称为 相对虚拟地址(RVA)，表示<strong>相对内存映象头的偏移</strong>。</li>
+</ul>
+<p>然而CPU 的某些指令是需要使用<strong>绝对地址</strong>的，比如取全局变量的地址，传递函数的地址，以及编译后的汇编指令中肯定需要用到绝对地址而不是相对映象头的偏移，因此PE文件会建议操作系统将其加载到某个内存地址(这个叫<strong>基地址</strong>。段地址其实就是一种基地址，但基地址并不等于就是段地址)。编译器便根据这个地址求出代码中一些 全局变量和函数的地址，并将这些地址用到对应的指令中。<br>因此可以得出<code>VA = RVA + IMAGEBASE</code>。</p>
+<h1 id="3-DOS头"><a href="#3-DOS头" class="headerlink" title="3. DOS头"></a>3. DOS头</h1><h2 id="3-1-DOS头"><a href="#3-1-DOS头" class="headerlink" title="3.1 DOS头"></a>3.1 DOS头</h2><p>DOS头是PE文件结构的第一个头，用来保持对DOS系统的兼容，并且用于<strong>定位真正的PE头</strong>。</p>
+<p>因为DOS操作系统已经不存在了，DOS头现在的作用也就是保持一个兼容给出一个提示，没什么太大作用。</p>
+<p>DOS头在winnt.h头文件中的定义如下（该文件头大小为40h，64d）</p>
+<blockquote>
+<p>TIPS:WORD是双字节，LONG是4字节</p>
+</blockquote>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_DOS_HEADER</span> {</span>		</span><br><span class="line">	WORD	e_magic;						 <span class="comment">//00h EXE标志MZ，MZ是一个人名的缩写</span></span><br><span class="line">	WORD	e_cblp;							 <span class="comment">//02h 最后（部分)页中的字节数</span></span><br><span class="line">	WORD	e_cp;							 <span class="comment">//04h 文件中的全部和部分页数</span></span><br><span class="line">	WORD	e_crlc;							 <span class="comment">//06h 重定位表中的指针数</span></span><br><span class="line">	WORD	e_cparhdr;						 <span class="comment">//08h 头部尺寸，以段落为单位</span></span><br><span class="line">	WORD	e_minalloc;						 <span class="comment">//0Ah 所需的最小附加段</span></span><br><span class="line">	WORD	e_maxalloc;						 <span class="comment">//0Ch 所需的最大附加段</span></span><br><span class="line">	WORD	e_ss;							 <span class="comment">//0Eh 初始的SS值(相对偏移量)</span></span><br><span class="line">	WORD	e_sp;							 <span class="comment">//10h 初始的SP值</span></span><br><span class="line">	WORD	e_csum;							 <span class="comment">//12h 校验和</span></span><br><span class="line">	WORD	e_ip;							 <span class="comment">//14h 初始的IP值</span></span><br><span class="line">	WORD	e_cs;							 <span class="comment">//16h 初始的CS值</span></span><br><span class="line">	WORD	e_lfarlc;						 <span class="comment">//18h 重定位表的字节偏移量</span></span><br><span class="line">	WORD	e_ovno;							 <span class="comment">//1Ah 覆盖号</span></span><br><span class="line">	WORD	e_res[<span class="number">4</span>];						 <span class="comment">//1Ch 保留字</span></span><br><span class="line">	WORD	e_oemid;						 <span class="comment">//24h EM标识符（相对e_oeminfo )</span></span><br><span class="line">	WORD	e_oeminfo;						 <span class="comment">//26h OEM信息; e_oemid specific</span></span><br><span class="line">	WORD	e_res2[<span class="number">10</span>];						 <span class="comment">//28h 保留字</span></span><br><span class="line">	LONG	e_lfanew;						 <span class="comment">//3Ch PE头相对于文件的偏移地址</span></span><br><span class="line">} IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_DOS_SIGNATURE 0x4D5A <span class="comment">//MZ</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>我们关注的主要是两个属性：e_magic 和 e_lfanew</strong></p>
+<ul>
+<li>e_magic用来标志这是一个PE文件</li>
+<li>e_lfanew用来标志NT头的偏移。</li>
+</ul>
+<p><img src="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/image-20241229185221801.png" alt="image-20241229185221801"></p>
+<p>一般来说DOS头的大小为0x40 byte，即64个字节</p>
+<p>65开始为PE头</p>
+<h2 id="3-2-DOS存根"><a href="#3-2-DOS存根" class="headerlink" title="3.2 DOS存根"></a>3.2 DOS存根</h2><p>那么，其他属性的作用是什么呢？</p>
+<p>我们把00000000到000000B0之间的数据拷贝下来粘贴进一个新文件，保存为dos.bin</p>
+<p><img src="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/1688456-20220710222135461-1768083568.png" alt="imgsaDAS"></p>
+<p>这一块代码实际上是在编译-连接的时候自动添加进来的一个程序，被称为<strong>DOS存根</strong></p>
+<p>读一下汇编，它的作用就是输出”This program cannot be run in DOS mode.”这个字符串，然后功能吗是4C01，即退出程序。</p>
+<h2 id="3-3-小实验：只有e-magic和e-lfanew这两个属性有用"><a href="#3-3-小实验：只有e-magic和e-lfanew这两个属性有用" class="headerlink" title="3.3 小实验：只有e_magic和e_lfanew这两个属性有用"></a>3.3 小实验：只有e_magic和e_lfanew这两个属性有用</h2><p>为了证明DOS头只有前2个字节（MZ标识）和后4个字节（指向PE头地址）有用，即只有e_magic和e_lfanew这两个属性有用，其他属性都是没用的。我们测试一下。</p>
+<p>我们把除了这两个属性之外的属性全部填充为00，再次尝试运行程序。</p>
+<p><img src="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/image-20241229185851381.png" alt="image-20241229185851381"></p>
+<p>程序成功运行</p>
+<p><img src="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/image-20241229185956293.png" alt="image-20241229185956293"></p>
+<h1 id="4-NT头"><a href="#4-NT头" class="headerlink" title="4. NT头"></a>4. NT头</h1><p>NT头结构体主要有3个属性</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DWORD                   Signature;</span><br><span class="line">IMAGE_FILE_HEADER       FileHeader;</span><br><span class="line">IMAGE_OPTIONAL_HEADER64 OptionalHeader;</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>PE标识</li>
+<li>文件头</li>
+<li>可选头</li>
+</ul>
+<h2 id="4-1-PE标识"><a href="#4-1-PE标识" class="headerlink" title="4.1 PE标识"></a>4.1 PE标识</h2><p>固定的<strong>PE</strong>，两个字节的字符.</p>
+<h2 id="4-2-PE文件头"><a href="#4-2-PE文件头" class="headerlink" title="4.2 PE文件头"></a>4.2 PE文件头</h2><p>通过前面介绍的DOS头（IMAGE_DOS_HEADER）中的e_lfanew属性，我们可以找到真正的PE头（IMAGE_NT_HEADERS），IMAGE_NT_HEADERS的定义如下</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _WIN64</span></span><br><span class="line"><span class="keyword">typedef</span> IMAGE_NT_HEADERS64          IMAGE_NT_HEADERS;</span><br><span class="line"><span class="keyword">typedef</span> PIMAGE_NT_HEADERS64         PIMAGE_NT_HEADERS;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="keyword">typedef</span> IMAGE_NT_HEADERS32          IMAGE_NT_HEADERS;</span><br><span class="line"><span class="keyword">typedef</span> PIMAGE_NT_HEADERS32         PIMAGE_NT_HEADERS;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="4-3-可选头"><a href="#4-3-可选头" class="headerlink" title="4.3 可选头"></a>4.3 可选头</h2></body></html></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">IX221</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/">http://example.com/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">摘星阁</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Reverse/">Reverse</a></div><div class="post_share"><div class="social-share" data-image="/img/touxiang1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/07/LLVM-IR-%E7%A0%94%E7%A9%B6%E5%88%86%E6%9E%90/" title="LLVM IR研究分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LLVM IR研究分析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/07/11/2023SCTF-Syclang-%E4%B8%AD%E9%97%B4%E6%8C%87%E4%BB%A4IR%E5%88%86%E6%9E%90/" title="2023SCTF-Syclang-中间指令IR分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-11</div><div class="title">2023SCTF-Syclang-中间指令IR分析</div></div></a></div><div><a href="/2023/02/22/reverse-GWCTF-2019-re3-AES%E5%8A%A0%E5%AF%86/" title="reverse-[GWCTF 2019]re3-AES加密"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-22</div><div class="title">reverse-[GWCTF 2019]re3-AES加密</div></div></a></div><div><a href="/2023/02/18/reverse-ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/" title="reverse-[ACTF新生赛2020]usualCrypt"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-18</div><div class="title">reverse-[ACTF新生赛2020]usualCrypt</div></div></a></div><div><a href="/2023/02/27/reverse-angr%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8A%80%E6%9C%AF/" title="reverse-angr自动化技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-27</div><div class="title">reverse-angr自动化技术</div></div></a></div><div><a href="/2023/02/19/reverse-buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951/" title="reverse-buuctf刷题记录1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-19</div><div class="title">reverse-buuctf刷题记录1</div></div></a></div><div><a href="/2023/02/24/reverse-buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%952/" title="reverse-buuctf刷题记录2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-24</div><div class="title">reverse-buuctf刷题记录2</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/touxiang1.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">IX221</div><div class="author-info__description">IX221 i4 v3ry c0ol.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ix221"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎访问 这是我复习的地方 Orz</div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script><script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%95%A5%E6%98%AFPE%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">1. 啥是PE？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">2.PE文件结构概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 PE文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%BC%96%E5%86%99%E7%A4%BA%E4%BE%8B%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 编写示例程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-VA-%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80-%E4%B8%8E-RVA-%E7%9B%B8%E5%AF%B9%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 VA(虚拟地址)与 RVA(相对虚拟地址)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-DOS%E5%A4%B4"><span class="toc-number">3.</span> <span class="toc-text">3. DOS头</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-DOS%E5%A4%B4"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 DOS头</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-DOS%E5%AD%98%E6%A0%B9"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 DOS存根</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E5%B0%8F%E5%AE%9E%E9%AA%8C%EF%BC%9A%E5%8F%AA%E6%9C%89e-magic%E5%92%8Ce-lfanew%E8%BF%99%E4%B8%A4%E4%B8%AA%E5%B1%9E%E6%80%A7%E6%9C%89%E7%94%A8"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 小实验：只有e_magic和e_lfanew这两个属性有用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-NT%E5%A4%B4"><span class="toc-number">4.</span> <span class="toc-text">4. NT头</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-PE%E6%A0%87%E8%AF%86"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 PE标识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-PE%E6%96%87%E4%BB%B6%E5%A4%B4"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 PE文件头</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E5%8F%AF%E9%80%89%E5%A4%B4"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 可选头</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/" title="PE文件结构+实验">PE文件结构+实验</a><time datetime="2024-12-29T06:59:48.000Z" title="发表于 2024-12-29 14:59:48">2024-12-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/07/LLVM-IR-%E7%A0%94%E7%A9%B6%E5%88%86%E6%9E%90/" title="LLVM IR研究分析">LLVM IR研究分析</a><time datetime="2024-09-07T11:19:45.000Z" title="发表于 2024-09-07 19:19:45">2024-09-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/02/MFC%E6%A1%86%E6%9E%B6%E8%BD%AF%E4%BB%B6%E9%80%86%E5%90%91%E7%A0%94%E7%A9%B6/" title="MFC框架软件逆向研究">MFC框架软件逆向研究</a><time datetime="2024-09-02T03:46:43.000Z" title="发表于 2024-09-02 11:46:43">2024-09-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/26/%E6%B8%B8%E6%88%8F%E5%AE%89%E5%85%A8%E5%85%A5%E9%97%A8-%E6%89%AB%E9%9B%B7%E5%88%86%E6%9E%90-%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%B3%A8%E5%85%A5/" title="游戏安全入门-扫雷分析/远程线程注入">游戏安全入门-扫雷分析/远程线程注入</a><time datetime="2024-07-26T08:20:46.000Z" title="发表于 2024-07-26 16:20:46">2024-07-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/26/%E8%AE%B0%E7%94%B1%E9%95%BF%E5%9F%8E%E6%9D%AF%E5%88%9D%E8%B5%9BTime-Machine%E6%8E%8C%E6%8F%A1%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B%E5%B9%B6%E5%87%BA%E9%A2%98/" title="记由长城杯初赛Time_Machine掌握父子进程并出题">记由长城杯初赛Time_Machine掌握父子进程并出题</a><time datetime="2024-07-26T06:22:21.000Z" title="发表于 2024-07-26 14:22:21">2024-07-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By IX221</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
