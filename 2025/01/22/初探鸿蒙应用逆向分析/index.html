@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>初探鸿蒙应用逆向分析 | 摘星阁</title><meta name="author" content="IX221"><meta name="copyright" content="IX221"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
+<meta property="og:title" content="初探鸿蒙应用逆向分析">
+<meta property="og:url" content="http://example.com/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="摘星阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/touxiang1.png">
+<meta property="article:published_time" content="2025-01-22T05:49:55.000Z">
+<meta property="article:modified_time" content="2025-01-22T05:51:55.348Z">
+<meta property="article:author" content="IX221">
+<meta property="article:tag" content="移动安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/touxiang1.png"><link rel="shortcut icon" href="/img/touxiang.png"><link rel="canonical" href="http://example.com/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '初探鸿蒙应用逆向分析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-01-22 13:51:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/touxiang1.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="摘星阁"><span class="site-name">摘星阁</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">初探鸿蒙应用逆向分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-22T05:49:55.000Z" title="发表于 2025-01-22 13:49:55">2025-01-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-22T05:51:55.348Z" title="更新于 2025-01-22 13:51:55">2025-01-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">849</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="初探鸿蒙应用逆向分析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><html><head></head><body><h1 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h1><p>近年来，鸿蒙应用开发新兴起来，所以本文借一道鸿蒙应用Demo梳理一下鸿蒙的应用程序的逆向方法。</p>
+<blockquote>
+<p>鸿蒙的定位不是替代安卓，而是实现万物互联。鸿蒙OS是一款面向万物互联新时代的、全场景、分布式的操作系统，实现OS与 硬件解绑、生态共享、跨端共享等。</p>
+</blockquote>
+<h1 id="1-实战-SU-Harmony"><a href="#1-实战-SU-Harmony" class="headerlink" title="1. 实战-SU_Harmony"></a>1. 实战-SU_Harmony</h1><p>题目附件为<code>hap</code>包。</p>
+<h2 id="1-1-HAP包"><a href="#1-1-HAP包" class="headerlink" title="1.1 HAP包"></a>1.1 HAP包</h2><p>那么什么是hap包呢?   （<strong>类比APK包</strong>）</p>
+<p>官方文档解释如下：</p>
+<blockquote>
+<p>HAP（Harmony Ability Package）是应用安装和运行的基本单元。HAP包是由代码、资源、第三方库、配置文件等打包生成的模块包，其主要分为两种类型：entry和feature。</p>
+<p>entry：应用的主模块，作为应用的入口，提供了应用的基础功能。</p>
+<p>feature：应用的动态特性模块，作为应用能力的扩展，可以根据用户的需求和设备类型进行选择性安装。</p>
+<p>应用程序包可以只包含一个基础的entry包，也可以包含一个基础的entry包和多个功能性的feature包。</p>
+</blockquote>
+<p>跟APK相似，所以，我们将hap文件解压。</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737083656788-4156a992-3b87-4bf5-b22b-884e0d31b938.png"></p>
+<p>逆向hap包，我们需要关注这里面的 <code>./ets/modules.abc</code> 和 <code>./libs</code>。（类比逆向APK的java层和so层）</p>
+<p>即 ArkTS源码的编译结果（ArkTS是鸿蒙原生应用的开发语言）和动态库 。</p>
+<h2 id="1-2-逆向分析module-abc"><a href="#1-2-逆向分析module-abc" class="headerlink" title="1.2 逆向分析module.abc"></a>1.2 逆向分析module.abc</h2><p>modules.abc的反编译工具我们使用基于jadx和abcde开发的abc-decompiler。</p>
+<p>（<a target="_blank" rel="noopener" href="https://github.com/ohos-decompiler/abc-decompiler%EF%BC%89">https://github.com/ohos-decompiler/abc-decompiler）</a></p>
+<p>使用abc-decompiler打开modules.abc后可见源代码结构如下：</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737084622673-d10b39f0-6396-420c-accf-2ebe4734dd94.png"></p>
+<p>跟进源代码中main包的pages目录，这里包含了该程序中的所有的页面，这里只有一个Index页面。</p>
+<p>明显看到了这几个敏感的地方。</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737084821258-93189f8b-bdc4-4470-9213-500b9a24a9b7.png"></p>
+<p>我们看onSubmit事件, 跟进handleInput</p>
+<p>找到#~@0&gt;#handleInput，看到调用了libentry.so，故check函数逻辑在so里。</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737085174316-60357a57-001a-4ae8-b9e3-0edb4c99efa8.png"></p>
+<h2 id="1-3-逆向分析libentry-so"><a href="#1-3-逆向分析libentry-so" class="headerlink" title="1.3 逆向分析libentry.so"></a>1.3 逆向分析libentry.so</h2><p>定位入口函数</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737085757621-77c688be-cf62-493d-b52b-2f8a9254d097.png"></p>
+<p>双击跟进</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737085880591-1f1f9da1-6e77-4dad-9d6b-ad2ae67f03cf.png"></p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737085893582-d2f9fc3d-5e3a-4349-8684-a177eaad55a4.png"></p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737085906986-02821bb3-4d1c-4706-a230-3e0673150d76.png"></p>
+<p>找到了check函数 sub_3750 。</p>
+<p>首先看到一大坨，这里使用了ollvm的指令混淆,把运算变复杂了,超级难看。</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737085970143-9408df61-968a-452d-8d6c-45d5cf9be35b.png"></p>
+<p>审计代码，猜出flag_len = 32。</p>
+<p>指令混淆根据 vxxx=0.0可以看懂代码逻辑，代码量不太大。</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737086890401-3325b191-bb6c-4aaa-9b76-418b8a96b1f5.png"></p>
+<p>比较的地方和密文数据很容易找到，sub_57B0才是真正的算法 。</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737087090779-e80aa667-9e9b-4e08-ab75-421bad4aa848.png"></p>
+<p>提取密文</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737087277319-fbf341b5-e726-4db4-8f96-596f6bdaa106.png"></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">999272289930604998</span>,</span><br><span class="line"><span class="number">1332475531266467542</span>,</span><br><span class="line"><span class="number">1074388003071116830</span>,</span><br><span class="line"><span class="number">1419324015697459326</span>,</span><br><span class="line"><span class="number">978270870200633520</span>,</span><br><span class="line"><span class="number">369789474534896558</span>,</span><br><span class="line"><span class="number">344214162681978048</span>,</span><br><span class="line"><span class="number">2213954953857181622.</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="1-3-1-主要加密运算分析"><a href="#1-3-1-主要加密运算分析" class="headerlink" title="1.3.1 主要加密运算分析"></a>1.3.1 主要加密运算分析</h3><p>跟进 sub_57B0</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737087412802-feb559c1-1efd-41bb-8021-203ab20f0cbc.png"></p>
+<p>以下6个函数是加密</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737087534509-8c0bee21-2f57-49e1-ae52-8060cb082c1b.png"></p>
+<p>我们对运算处理函数进行逐个分析：（每个函数都有指令混淆）</p>
+<p>sub_62F0</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737087626004-f300aeec-8966-4ef7-9cfe-cc0408f3a6ed.png"></p>
+<p>sub_CC10</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737087933315-cd4f262c-5c00-4918-98cc-8305f5ea8c05.png"></p>
+<p>sub_6D20</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737088383085-d26789d0-8d38-4e87-b880-d91836d54ada.png"></p>
+<p>sub_8270</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737088613092-749aea5a-b10b-43ba-965c-be9e54a36f1f.png"></p>
+<p>sub_9890</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737088663700-b485daf6-358d-45f4-9bb4-c01cc58a32a4.png"></p>
+<p>sub_A8F0</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737088804485-65241b89-ddf0-41fc-bb52-02141fd2f976.png"></p>
+<p>sub_C160</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737088899500-2b2f7eef-ef89-4678-8a1b-eb2394de36f6.png"></p>
+<p>整理一下</p>
+<p><img src="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/1737088917732-647b04e7-ca98-4bb5-993c-3c09f7c8329d.png"></p>
+<p>逻辑差不多这样.</p>
+<p>我们可以发现其实就是完全平方</p>
+<p>(((x*x+(x)*2))-3)/2</p>
+<h3 id="1-3-2-完全平方-Math-求解"><a href="#1-3-2-完全平方-Math-求解" class="headerlink" title="1.3.2 完全平方 Math 求解"></a>1.3.2 完全平方 Math 求解</h3><p>求解的话：</p>
+<p>把密文乘2+3等于x*x+2x,再加1就凑成完全平方，然后开根号就是x+1 再减1就是x</p>
+<p>解题脚本：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">numbers = [</span><br><span class="line">    <span class="number">999272289930604998</span>,</span><br><span class="line">    <span class="number">1332475531266467542</span>,</span><br><span class="line">    <span class="number">1074388003071116830</span>,</span><br><span class="line">    <span class="number">1419324015697459326</span>,</span><br><span class="line">    <span class="number">978270870200633520</span>,</span><br><span class="line">    <span class="number">369789474534896558</span>,</span><br><span class="line">    <span class="number">344214162681978048</span>,</span><br><span class="line">    <span class="number">2213954953857181622</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">result_str = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">enumerate</span>(numbers):</span><br><span class="line">    updated_value = value * <span class="number">2</span> + <span class="number">4</span></span><br><span class="line">    result = math.sqrt(updated_value) - <span class="number">1</span></span><br><span class="line">    result_str += <span class="string">f"<span class="subst">{<span class="built_in">hex</span>(<span class="built_in">int</span>(result))+<span class="string">','</span>}</span>"</span></span><br><span class="line"><span class="built_in">print</span>(result_str)</span><br><span class="line"></span><br><span class="line">hex_values = [</span><br><span class="line">    <span class="number">0x54435553</span>, <span class="number">0x614d7b46</span>, <span class="number">0x575f6837</span>, <span class="number">0x646c726f</span>,</span><br><span class="line">    <span class="number">0x535f7349</span>, <span class="number">0x33425f30</span>, <span class="number">0x31747561</span>, <span class="number">0x7d6c7566</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> hex_values:</span><br><span class="line">    temp = <span class="string">f"<span class="subst">{value:08x}</span>"</span></span><br><span class="line">    strr = <span class="string">""</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 每两个十六进制数字转换为一个字符</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">8</span>, <span class="number">2</span>):</span><br><span class="line">        hex_pair = temp[j:j+<span class="number">2</span>]</span><br><span class="line">        char_value = <span class="built_in">chr</span>(<span class="built_in">int</span>(hex_pair, <span class="number">16</span>))</span><br><span class="line">        strr += char_value</span><br><span class="line">    </span><br><span class="line">    strr = strr[::-<span class="number">1</span>]</span><br><span class="line">    flag += strr</span><br><span class="line"><span class="comment"># 输出最终结果</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"></span><br><span class="line"><span class="comment"># SUCTF{Ma7h_WorldIs_S0_B3aut1ful}</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+</body></html></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">IX221</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/">http://example.com/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">摘星阁</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/">移动安全</a></div><div class="post_share"><div class="social-share" data-image="/img/touxiang1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/01/20/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E5%88%9D%E8%B5%9B%E5%94%AF%E4%B8%80RE%E9%A2%98WriteUp/" title="2025西湖论剑初赛唯一RE题WriteUp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2025西湖论剑初赛唯一RE题WriteUp</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/touxiang1.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">IX221</div><div class="author-info__description">IX221 i4 v3ry c0ol.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ix221"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎访问 这是我复习的地方 Orz</div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script><script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">0. 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%AE%9E%E6%88%98-SU-Harmony"><span class="toc-number">2.</span> <span class="toc-text">1. 实战-SU_Harmony</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-HAP%E5%8C%85"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 HAP包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E9%80%86%E5%90%91%E5%88%86%E6%9E%90module-abc"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 逆向分析module.abc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E9%80%86%E5%90%91%E5%88%86%E6%9E%90libentry-so"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 逆向分析libentry.so</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E4%B8%BB%E8%A6%81%E5%8A%A0%E5%AF%86%E8%BF%90%E7%AE%97%E5%88%86%E6%9E%90"><span class="toc-number">2.3.1.</span> <span class="toc-text">1.3.1 主要加密运算分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9-Math-%E6%B1%82%E8%A7%A3"><span class="toc-number">2.3.2.</span> <span class="toc-text">1.3.2 完全平方 Math 求解</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/22/%E5%88%9D%E6%8E%A2%E9%B8%BF%E8%92%99%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/" title="初探鸿蒙应用逆向分析">初探鸿蒙应用逆向分析</a><time datetime="2025-01-22T05:49:55.000Z" title="发表于 2025-01-22 13:49:55">2025-01-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/20/2025%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E5%88%9D%E8%B5%9B%E5%94%AF%E4%B8%80RE%E9%A2%98WriteUp/" title="2025西湖论剑初赛唯一RE题WriteUp">2025西湖论剑初赛唯一RE题WriteUp</a><time datetime="2025-01-20T03:33:44.000Z" title="发表于 2025-01-20 11:33:44">2025-01-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/17/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E9%80%86%E5%90%91%E5%88%86%E6%9E%90-%E6%B7%B7%E6%B7%86%E5%AF%B9%E6%8A%97/" title="软件系统安全逆向分析-混淆对抗">软件系统安全逆向分析-混淆对抗</a><time datetime="2025-01-17T05:28:23.000Z" title="发表于 2025-01-17 13:28:23">2025-01-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/29/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84-%E5%AE%9E%E9%AA%8C/" title="PE文件结构+实验">PE文件结构+实验</a><time datetime="2024-12-29T06:59:48.000Z" title="发表于 2024-12-29 14:59:48">2024-12-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/07/LLVM-IR-%E7%A0%94%E7%A9%B6%E5%88%86%E6%9E%90/" title="LLVM IR研究分析">LLVM IR研究分析</a><time datetime="2024-09-07T11:19:45.000Z" title="发表于 2024-09-07 19:19:45">2024-09-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By IX221</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
